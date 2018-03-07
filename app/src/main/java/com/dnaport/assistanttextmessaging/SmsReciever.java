@@ -1,5 +1,6 @@
 package com.dnaport.assistanttextmessaging;
 
+import android.app.Application;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -8,9 +9,12 @@ import android.telephony.SmsManager;
 import android.telephony.SmsMessage;
 import android.util.Log;
 import org.json.JSONObject;
+import java.util.regex.Pattern;
 
 public class SmsReciever extends BroadcastReceiver {
     private final SmsManager sms = SmsManager.getDefault();
+    private final String trigger = AssistantConfig.getTrigger();
+//    private AssistantConfig assistantConfig;
 
     @Override
     public void onReceive(Context context, Intent intent) {
@@ -23,10 +27,12 @@ public class SmsReciever extends BroadcastReceiver {
                     String phoneNumber = currentMessage.getDisplayOriginatingAddress();
                     String message = currentMessage.getDisplayMessageBody();
 
-                    String[] msgSplit = message.split(" ");
+                    if (hasTrigger(message.toLowerCase())) {
+                        String query = getQuery(message);
+                        JSONObject jsonObject = new MakeRequest().newRequest(query);
+                        replyBack(phoneNumber, jsonObject.getString("response"));
+                    }
 
-                    JSONObject jsonObject = new MakeRequest().newRequest(message);
-                    replyBack(phoneNumber, jsonObject.getString("response"));
                 }
             }
 
@@ -35,10 +41,22 @@ public class SmsReciever extends BroadcastReceiver {
         }
     }
 
+    private String getQuery(String msg) {
+        return msg.toLowerCase().replaceAll("\\b" + trigger + "\\b", "");
+    }
+
     private void replyBack(String number, String message) {
         if (message == null) {
             message = "How can I help?";
         }
         sms.sendTextMessage(number, null, message, null, null);
+    }
+
+    private boolean hasTrigger(String message) {
+        Pattern p = Pattern.compile("(.*\\b" + trigger + "\\b)");
+        if (p.matcher(message).find()) {
+            return true;
+        }
+        return false;
     }
 }
