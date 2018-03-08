@@ -27,8 +27,8 @@
             android:layout_height="wrap_content" android:id="@+id/addNewUser"/>
     <Button
             android:text="Close window"
-            android:background="@color/colorButtonClosePopupWindow"
-            android:textColor="@color/colorButtonText"
+            android:background="@color/colorButtonText"
+            android:textColor="@color/colorButtonClosePopupWindow"
             android:layout_width="match_parent"
             android:onClick="closeAddUserDialog"
             android:layout_height="wrap_content" android:id="@+id/closePopup"/>

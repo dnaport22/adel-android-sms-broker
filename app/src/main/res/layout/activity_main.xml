@@ -38,7 +38,7 @@
             <Button
                     android:id="@+id/userGroupPopupButton"
                     android:text="User Group"
-                    android:background="@color/colorButton"
+                    android:background="@color/colorPrimaryDark"
                     android:textColor="@color/colorButtonText"
                     android:layout_width="match_parent" android:layout_height="50dp"/>
         </LinearLayout>

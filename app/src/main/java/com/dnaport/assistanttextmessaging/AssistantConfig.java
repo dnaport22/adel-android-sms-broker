@@ -32,7 +32,7 @@ public class AssistantConfig {
 
     public static void updateAssistantLogs(String msg, String num) {
         String newLog = String.format(
-                "[%2d]: SENT: %s TO %s",
+                "[%2d]: SENT => %s, TO => %s",
                 count.incrementAndGet(), msg, num
                 );
         assistantLogs.add(newLog);

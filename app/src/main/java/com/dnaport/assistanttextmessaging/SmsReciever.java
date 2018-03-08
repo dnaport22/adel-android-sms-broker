@@ -53,9 +53,9 @@ public class SmsReciever extends BroadcastReceiver {
     }
 
     private void replyBack(String number, String message) {
-        if (message != null || !message.equals("null")) {
+        if (message == "null") {
             sms.sendTextMessage(number, null, "How can I help?", null, null);
-            AssistantConfig.updateAssistantLogs(message, number);
+            AssistantConfig.updateAssistantLogs("How can I help", number);
         } else {
             sms.sendTextMessage(number, null, message, null, null);
             AssistantConfig.updateAssistantLogs(message, number);
