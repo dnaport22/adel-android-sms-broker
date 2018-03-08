@@ -14,7 +14,6 @@ import java.util.regex.Pattern;
 public class SmsReciever extends BroadcastReceiver {
     private final SmsManager sms = SmsManager.getDefault();
     private final String trigger = AssistantConfig.getTrigger();
-//    private AssistantConfig assistantConfig;
 
     @Override
     public void onReceive(Context context, Intent intent) {
@@ -26,11 +25,11 @@ public class SmsReciever extends BroadcastReceiver {
                     SmsMessage currentMessage = SmsMessage.createFromPdu((byte[]) pdusObj[i]);
                     String phoneNumber = currentMessage.getDisplayOriginatingAddress();
                     String message = currentMessage.getDisplayMessageBody();
-
                     if (hasTrigger(message.toLowerCase())) {
-                        String query = getQuery(message);
+                        String query = getQuery(message).trim();
                         JSONObject jsonObject = new MakeRequest().newRequest(query);
                         replyBack(phoneNumber, jsonObject.getString("response"));
+                        AssistantConfig.updateAssistantLogs(query, message, phoneNumber);
                     }
 
                 }
@@ -46,7 +45,7 @@ public class SmsReciever extends BroadcastReceiver {
     }
 
     private void replyBack(String number, String message) {
-        if (message == null) {
+        if (message.isEmpty()) {
             message = "How can I help?";
         }
         sms.sendTextMessage(number, null, message, null, null);
@@ -56,7 +55,8 @@ public class SmsReciever extends BroadcastReceiver {
         Pattern p = Pattern.compile("(.*\\b" + trigger + "\\b)");
         if (p.matcher(message).find()) {
             return true;
+        } else {
+            return false;
         }
-        return false;
     }
 }

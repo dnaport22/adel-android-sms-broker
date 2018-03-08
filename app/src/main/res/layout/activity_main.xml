@@ -20,26 +20,30 @@
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="100dp" android:layout_below="@+id/linearLayout"
-                android:id="@+id/midLayout">
-            <EditText
-                    android:layout_width="match_parent"
+                android:id="@+id/midLayout"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp">
+            <TextView
+                    android:text="Listening for incoming text messages with 'Ask Google' tag..."
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:inputType="text"
-                    android:text="Ask Google"
-                    android:ems="10"
-                    android:id="@+id/triggerEdittext"/>
+                    android:id="@+id/textView2" android:layout_weight="1"
+                    android:textSize="18sp"/>
         </LinearLayout>
         <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:layout_below="@id/midLayout" android:id="@+id/linearLayout2">
-            <Button
-                    android:text="Save"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@color/colorButton"
-                    android:id="@+id/saveConfigButton" android:layout_weight="1"/>
+                android:layout_height="200dp"
+                android:id="@+id/bottomLayout"
+                android:layout_below="@+id/midLayout"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp">
+            <ListView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/logListView"
+                    android:background="@color/colorLogView"/>
         </LinearLayout>
+
     </RelativeLayout>
 </ScrollView>
