@@ -10,37 +10,49 @@
             android:paddingRight="10dp">
 
         <LinearLayout android:layout_width="match_parent" android:layout_height="200dp" android:id="@+id/linearLayout">
-
             <ImageView
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content" app:srcCompat="@drawable/google_assistant"
                     android:id="@+id/imageView3" android:layout_weight="1"/>
         </LinearLayout>
         <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="100dp" android:layout_below="@+id/linearLayout"
+                android:layout_height="80dp" android:layout_below="@+id/linearLayout"
                 android:id="@+id/midLayout"
                 android:paddingLeft="20dp"
-                android:paddingRight="20dp">
+                android:paddingRight="20dp" android:weightSum="1">
             <TextView
                     android:text="Listening for incoming text messages with 'Ask Google' tag..."
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/textView2" android:layout_weight="1"
+                    android:layout_height="60dp"
+                    android:id="@+id/textView2"
                     android:textSize="18sp"/>
+        </LinearLayout>
+        <LinearLayout android:orientation="horizontal"
+                      android:layout_width="match_parent"
+                      android:layout_height="60dp" android:layout_below="@+id/midLayout"
+                      android:id="@+id/buttonLayout"
+                      android:paddingLeft="20dp"
+                      android:paddingRight="20dp" android:weightSum="1">
+            <Button
+                    android:id="@+id/userGroupPopupButton"
+                    android:text="User Group"
+                    android:background="@color/colorButton"
+                    android:textColor="@color/colorButtonText"
+                    android:layout_width="match_parent" android:layout_height="50dp"/>
         </LinearLayout>
         <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
+                android:layout_height="300dp"
                 android:id="@+id/bottomLayout"
-                android:layout_below="@+id/midLayout"
+                android:layout_below="@+id/buttonLayout"
                 android:paddingLeft="20dp"
                 android:paddingRight="20dp">
             <ListView
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="300dp"
                     android:id="@+id/logListView"
                     android:background="@color/colorLogView"/>
         </LinearLayout>

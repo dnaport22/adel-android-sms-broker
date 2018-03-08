@@ -12,6 +12,7 @@ public class AssistantConfig {
     private static String trigger;
     private static ArrayList<String> assistantLogs = new ArrayList<String>();
     private static AtomicInteger count = new AtomicInteger(0);
+    private static ArrayList<String> userNumbers = new ArrayList<>();
 
     public static String getTrigger() {
         return AssistantConfig.trigger;
@@ -29,10 +30,10 @@ public class AssistantConfig {
         return assistantLogs;
     }
 
-    public static void updateAssistantLogs(String query, String msg, String num) {
+    public static void updateAssistantLogs(String msg, String num) {
         String newLog = String.format(
-                "[%2d]: SENT: %s TO %s FOR QUERY -> %s",
-                count.incrementAndGet(), msg, num, query
+                "[%2d]: SENT: %s TO %s",
+                count.incrementAndGet(), msg, num
                 );
         assistantLogs.add(newLog);
         listener.onLogUpdated();
@@ -41,5 +42,13 @@ public class AssistantConfig {
     public static void setListener(MainActivity.LogViewEventListener ls) {
         assistantLogs.add("Listening for logs...");
         listener = ls;
+    }
+
+    public static void addUserNumber(String number) {
+        userNumbers.add(number);
+    }
+
+    public static ArrayList<String> getUserNumbers() {
+        return userNumbers;
     }
 }

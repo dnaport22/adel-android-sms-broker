@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <ListView
+            android:id="@+id/List"
+            android:layout_width="match_parent"
+            android:layout_height="348dp" >
+    </ListView>
+    <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="phone"
+            android:hint="Mobile number"
+            android:ems="10"
+            android:id="@+id/newUserNumber"/>
+    <Button
+            android:text="Add user"
+            android:layout_width="match_parent"
+            android:background="@color/colorButtonAddUser"
+            android:textColor="@color/colorButtonText"
+            android:paddingBottom="10dp"
+            android:onClick="addNewUserNumber"
+            android:layout_height="wrap_content" android:id="@+id/addNewUser"/>
+    <Button
+            android:text="Close window"
+            android:background="@color/colorButtonClosePopupWindow"
+            android:textColor="@color/colorButtonText"
+            android:layout_width="match_parent"
+            android:onClick="closeAddUserDialog"
+            android:layout_height="wrap_content" android:id="@+id/closePopup"/>
+
+</LinearLayout>
