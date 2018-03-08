@@ -14,7 +14,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="phone"
-            android:hint="Mobile number"
+            android:hint="Mobile number (with country/area code)"
             android:ems="10"
             android:id="@+id/newUserNumber"/>
     <Button
@@ -22,7 +22,8 @@
             android:layout_width="match_parent"
             android:background="@color/colorButtonAddUser"
             android:textColor="@color/colorButtonText"
-            android:paddingBottom="10dp"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
             android:onClick="addNewUserNumber"
             android:layout_height="wrap_content" android:id="@+id/addNewUser"/>
     <Button
