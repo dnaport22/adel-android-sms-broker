@@ -2,6 +2,7 @@ package com.dnaport.assistanttextmessaging;
 
 import android.widget.ArrayAdapter;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -16,6 +17,7 @@ public class AssistantConfig {
     private static final boolean TEXT_AND_AUDIO_RESPONSE = true;
     private static int RESPONSE_TYPE = 1;
     private static boolean RESPONSE_WITH_AUDIO = false;
+    private static File tempFileSaveDir;
 
     public static String getTrigger() {
         return AssistantConfig.trigger;
@@ -39,6 +41,14 @@ public class AssistantConfig {
 
     public static int getResponseType() {
         return RESPONSE_TYPE;
+    }
+
+    public static void setTempFileSaveDir(File tempDir) {
+        tempFileSaveDir = tempDir;
+    }
+
+    public static File getTempFileSaveDir() {
+        return tempFileSaveDir;
     }
 
     public static boolean doResponseWithAudio() {

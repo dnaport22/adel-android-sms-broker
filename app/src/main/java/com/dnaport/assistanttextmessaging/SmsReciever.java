@@ -5,14 +5,21 @@ import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.media.AudioFormat;
+import android.media.AudioManager;
+import android.media.AudioTrack;
 import android.os.Bundle;
 import android.provider.Telephony;
 import android.telephony.SmsManager;
 import android.telephony.SmsMessage;
 import android.util.Log;
 import android.widget.Toast;
+import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.regex.Pattern;
 
@@ -35,7 +42,7 @@ public class SmsReciever extends BroadcastReceiver {
                             String query = getQuery(message).trim();
                             JSONObject jsonObject = new MakeRequest().newRequest(
                                     query, AssistantConfig.doResponseWithAudio());
-                            replyBack(phoneNumber, jsonObject.getString("response"));
+                            replyBack(phoneNumber, jsonObject.getJSONObject("response"));
                         }
                     }
                 }
@@ -54,7 +61,14 @@ public class SmsReciever extends BroadcastReceiver {
         return msg.toLowerCase().replaceAll("\\b" + trigger + "\\b", "");
     }
 
-    private void replyBack(String number, String message) {
+    private void replyBack(String number, JSONObject response) throws JSONException {
+        String message = response.getString("text");
+//        if (AssistantConfig.doResponseWithAudio()) {
+//            String audio = response.getString("audio");
+//            byte[] audioByte = audio.getBytes();
+//            convertBytesToFile(audioByte);
+//        }
+
         if (message == "null") {
             sms.sendTextMessage(number, null, "How can I help?", null, null);
         } else {
@@ -62,6 +76,20 @@ public class SmsReciever extends BroadcastReceiver {
             sms.sendMultipartTextMessage(number, null, msgParts, null, null);
         }
 
+    }
+
+    private void convertBytesToFile(byte[] bytearray) {
+        try {
+
+            File outputFile = File.createTempFile("file", ".mp3", AssistantConfig.getTempFileSaveDir());
+            outputFile.deleteOnExit();
+            FileOutputStream fileoutputstream = new FileOutputStream(outputFile);
+            fileoutputstream.write(bytearray);
+            fileoutputstream.close();
+
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
 
     private boolean hasTrigger(String message) {

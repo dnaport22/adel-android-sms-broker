@@ -42,19 +42,19 @@
                     android:textColor="@color/colorButtonText"
                     android:layout_width="162dp" android:layout_height="50dp" android:layout_weight="1.13"/>
         </LinearLayout>
-        <LinearLayout android:orientation="horizontal"
-                      android:layout_width="match_parent"
-                      android:layout_height="60dp" android:layout_below="@+id/buttonLayout"
-                      android:id="@+id/toggleLayout"
-                      android:paddingLeft="20dp"
-                      android:paddingRight="20dp" android:weightSum="1">
-            <ToggleButton
-                    android:id="@+id/changeResponseType"
-                    android:textOff="Text only response"
-                    android:textOn="Audio and Text response"
-                    android:background="@color/colorPrimaryDark"
-                    android:textColor="@color/colorButtonText"
-                    android:layout_width="162dp" android:layout_height="50dp" android:layout_weight="1.13"/>
-        </LinearLayout>
+        <!--<LinearLayout android:orientation="horizontal"-->
+                      <!--android:layout_width="match_parent"-->
+                      <!--android:layout_height="60dp" android:layout_below="@+id/buttonLayout"-->
+                      <!--android:id="@+id/toggleLayout"-->
+                      <!--android:paddingLeft="20dp"-->
+                      <!--android:paddingRight="20dp" android:weightSum="1">-->
+            <!--<ToggleButton-->
+                    <!--android:id="@+id/changeResponseType"-->
+                    <!--android:textOff="Text only response"-->
+                    <!--android:textOn="Audio and Text response"-->
+                    <!--android:background="@color/colorPrimaryDark"-->
+                    <!--android:textColor="@color/colorButtonText"-->
+                    <!--android:layout_width="162dp" android:layout_height="50dp" android:layout_weight="1.13"/>-->
+        <!--</LinearLayout>-->
     </RelativeLayout>
 </ScrollView>

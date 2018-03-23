@@ -65,13 +65,16 @@ public class MainActivity extends AppCompatActivity {
                 }
         );
 
-        final ToggleButton responseTypeButton = (ToggleButton) findViewById(R.id.changeResponseType);
-        responseTypeButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                AssistantConfig.setResponseType(b);
-            }
-        });
+//        final ToggleButton responseTypeButton = (ToggleButton) findViewById(R.id.changeResponseType);
+//        responseTypeButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+//            @Override
+//            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+//                AssistantConfig.setResponseType(b);
+//            }
+//        });
+//
+//        AssistantConfig.setTempFileSaveDir(getCacheDir());
+
     }
 
     private void updateListView() {
