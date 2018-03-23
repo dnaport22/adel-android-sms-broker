@@ -10,9 +10,12 @@ public class AssistantConfig {
     private static MainActivity.LogViewEventListener listener;
     private static final String ASSISTANT_CONFIG = "AssistantConfig";
     private static String trigger;
-    private static ArrayList<String> assistantLogs = new ArrayList<String>();
     private static AtomicInteger count = new AtomicInteger(0);
     private static ArrayList<String> userNumbers = new ArrayList<>();
+    private static final boolean TEXT_ONLY_RESPONSE = false;
+    private static final boolean TEXT_AND_AUDIO_RESPONSE = true;
+    private static int RESPONSE_TYPE = 1;
+    private static boolean RESPONSE_WITH_AUDIO = false;
 
     public static String getTrigger() {
         return AssistantConfig.trigger;
@@ -26,22 +29,20 @@ public class AssistantConfig {
         return ASSISTANT_CONFIG;
     }
 
-    public static ArrayList<String> getLogArray() {
-        return assistantLogs;
-    }
-
-    public static void updateAssistantLogs(String msg, String num) {
-        String newLog = String.format(
-                "[%2d]: SENT => %s, TO => %s",
-                count.incrementAndGet(), msg, num
-                );
-        assistantLogs.add(newLog);
-        listener.onLogUpdated();
-    }
-
     public static void setListener(MainActivity.LogViewEventListener ls) {
-        assistantLogs.add("Listening for logs...");
         listener = ls;
+    }
+
+    public static void setResponseType(boolean text) {
+        RESPONSE_WITH_AUDIO = text == TEXT_AND_AUDIO_RESPONSE;
+    }
+
+    public static int getResponseType() {
+        return RESPONSE_TYPE;
+    }
+
+    public static boolean doResponseWithAudio() {
+        return RESPONSE_WITH_AUDIO;
     }
 
     public static void addUserNumber(String number) {

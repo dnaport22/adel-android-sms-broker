@@ -23,7 +23,7 @@
                 android:paddingLeft="20dp"
                 android:paddingRight="20dp" android:weightSum="1">
             <TextView
-                    android:text="Listening for incoming text messages with 'Ask Google' tag..."
+                    android:text="Listening for incoming text messages with 'purple' tag..."
                     android:layout_width="wrap_content"
                     android:layout_height="60dp"
                     android:id="@+id/textView2"
@@ -40,23 +40,21 @@
                     android:text="User Group"
                     android:background="@color/colorPrimaryDark"
                     android:textColor="@color/colorButtonText"
-                    android:layout_width="match_parent" android:layout_height="50dp"/>
+                    android:layout_width="162dp" android:layout_height="50dp" android:layout_weight="1.13"/>
         </LinearLayout>
-        <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="300dp"
-                android:id="@+id/bottomLayout"
-                android:layout_below="@+id/buttonLayout"
-                android:paddingLeft="20dp"
-                android:paddingRight="20dp"
-                android:paddingBottom="20dp">
-            <ListView
-                    android:layout_width="match_parent"
-                    android:layout_height="300dp"
-                    android:id="@+id/logListView"
-                    android:background="@color/colorLogView"/>
+        <LinearLayout android:orientation="horizontal"
+                      android:layout_width="match_parent"
+                      android:layout_height="60dp" android:layout_below="@+id/buttonLayout"
+                      android:id="@+id/toggleLayout"
+                      android:paddingLeft="20dp"
+                      android:paddingRight="20dp" android:weightSum="1">
+            <ToggleButton
+                    android:id="@+id/changeResponseType"
+                    android:textOff="Text only response"
+                    android:textOn="Audio and Text response"
+                    android:background="@color/colorPrimaryDark"
+                    android:textColor="@color/colorButtonText"
+                    android:layout_width="162dp" android:layout_height="50dp" android:layout_weight="1.13"/>
         </LinearLayout>
-
     </RelativeLayout>
 </ScrollView>

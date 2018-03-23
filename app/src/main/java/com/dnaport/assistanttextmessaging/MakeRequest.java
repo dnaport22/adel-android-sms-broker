@@ -11,7 +11,7 @@ public class MakeRequest {
     private JSONObject jsonObject = null;
 
     public JSONObject
-    newRequest(final String query) throws IOException, JSONException, InterruptedException {
+    newRequest(final String query, final boolean withAudio) throws IOException, JSONException, InterruptedException {
         Runnable run = new Runnable() {
             @Override
             public void run() {
@@ -22,6 +22,7 @@ public class MakeRequest {
                             .authority("google-assistant-api-dot-twist-ac01.appspot.com")
                             .path("ga-rest-api")
                             .appendQueryParameter("query", query)
+                            .appendQueryParameter("withAudio", String.valueOf(withAudio))
                             .build();
                     URL urls = new URL(uri.toString());
                     try (BufferedReader reader = new BufferedReader(new InputStreamReader(urls.openStream(), "UTF-8"))) {

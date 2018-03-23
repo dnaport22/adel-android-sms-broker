@@ -1,17 +1,20 @@
 package com.dnaport.assistanttextmessaging;
 
+import android.Manifest;
+import android.app.Activity;
 import android.app.Dialog;
+import android.content.pm.PackageManager;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ListView;
+import android.widget.*;
 
 
 public class MainActivity extends AppCompatActivity {
-    private String AssistTrigger = "ask google";
+    private String AssistTrigger = "purple";
+    private int ResponseType = 0;
     private ArrayAdapter<String> adapter;
     private ListView listView;
     private Dialog dialog;
@@ -29,6 +32,15 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         AssistantConfig.setTrigger(AssistTrigger);
+
+        if (ContextCompat.checkSelfPermission(this,
+                Manifest.permission.RECEIVE_MMS) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(
+                    this, new String[]{Manifest.permission.READ_SMS},
+                    1
+            );
+        }
+
         dialog = new Dialog(MainActivity.this);
         Button clickAddUserButton = (Button) findViewById(R.id.userGroupPopupButton);
         clickAddUserButton.setOnClickListener( new View.OnClickListener() {
@@ -44,10 +56,6 @@ public class MainActivity extends AppCompatActivity {
                 dialog.show();
             }
         });
-        listView = (ListView) findViewById(R.id.logListView);
-        adapter = new ArrayAdapter<>(
-                this, android.R.layout.simple_list_item_1 , AssistantConfig.getLogArray());
-        listView.setAdapter(adapter);
         AssistantConfig.setListener(
                 new LogViewEventListener() {
                     @Override
@@ -56,6 +64,14 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
         );
+
+        final ToggleButton responseTypeButton = (ToggleButton) findViewById(R.id.changeResponseType);
+        responseTypeButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                AssistantConfig.setResponseType(b);
+            }
+        });
     }
 
     private void updateListView() {

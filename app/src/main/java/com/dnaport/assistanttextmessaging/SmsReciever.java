@@ -33,7 +33,8 @@ public class SmsReciever extends BroadcastReceiver {
                     if (hasNumber(phoneNumber)) {
                         if (hasTrigger(message.toLowerCase())) {
                             String query = getQuery(message).trim();
-                            JSONObject jsonObject = new MakeRequest().newRequest(query);
+                            JSONObject jsonObject = new MakeRequest().newRequest(
+                                    query, AssistantConfig.doResponseWithAudio());
                             replyBack(phoneNumber, jsonObject.getString("response"));
                         }
                     }
@@ -54,20 +55,11 @@ public class SmsReciever extends BroadcastReceiver {
     }
 
     private void replyBack(String number, String message) {
-        message.length();
         if (message == "null") {
             sms.sendTextMessage(number, null, "How can I help?", null, null);
-            AssistantConfig.updateAssistantLogs("How can I help", number);
         } else {
-            if (message.length() > 100) {
-                String[] messageArray = message.split("\n");
-                for (int i = 0; i < messageArray.length; ++i) {
-                    sms.sendTextMessage(number, null, messageArray[i], null, null);
-                }
-            } else {
-                sms.sendTextMessage(number, null, message, null, null);
-            }
-            AssistantConfig.updateAssistantLogs(message, number);
+            ArrayList<String> msgParts = SmsManager.getDefault().divideMessage(message);
+            sms.sendMultipartTextMessage(number, null, msgParts, null, null);
         }
 
     }
