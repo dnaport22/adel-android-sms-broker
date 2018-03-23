@@ -6,6 +6,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.Telephony;
 import android.telephony.SmsManager;
 import android.telephony.SmsMessage;
 import android.util.Log;
@@ -53,11 +54,19 @@ public class SmsReciever extends BroadcastReceiver {
     }
 
     private void replyBack(String number, String message) {
+        message.length();
         if (message == "null") {
             sms.sendTextMessage(number, null, "How can I help?", null, null);
             AssistantConfig.updateAssistantLogs("How can I help", number);
         } else {
-            sms.sendTextMessage(number, null, message, null, null);
+            if (message.length() > 100) {
+                String[] messageArray = message.split("\n");
+                for (int i = 0; i < messageArray.length; ++i) {
+                    sms.sendTextMessage(number, null, messageArray[i], null, null);
+                }
+            } else {
+                sms.sendTextMessage(number, null, message, null, null);
+            }
             AssistantConfig.updateAssistantLogs(message, number);
         }
 
