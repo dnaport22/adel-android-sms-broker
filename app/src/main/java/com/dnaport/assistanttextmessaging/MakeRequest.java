@@ -1,4 +1,4 @@
-package com.dnaport.assistanttextmessaging;
+ package com.dnaport.assistanttextmessaging;
 
 import android.net.Uri;
 import org.json.JSONException;
@@ -18,8 +18,8 @@ public class MakeRequest {
                 try {
                     String line, jsonResponse = "";
                     Uri uri = new Uri.Builder()
-                            .scheme("https")
-                            .authority("google-assistant-api-dot-twist-ac01.appspot.com")
+                            .scheme("http")
+                            .authority("f7a12284.ngrok.io")
                             .path("ga-rest-api")
                             .appendQueryParameter("query", query)
                             .appendQueryParameter("withAudio", String.valueOf(withAudio))

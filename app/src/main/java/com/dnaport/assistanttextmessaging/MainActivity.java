@@ -13,7 +13,7 @@ import android.widget.*;
 
 
 public class MainActivity extends AppCompatActivity {
-    private String AssistTrigger = "purple";
+    private String AssistTrigger = "adel";
     private int ResponseType = 0;
     private ArrayAdapter<String> adapter;
     private ListView listView;
@@ -37,6 +37,14 @@ public class MainActivity extends AppCompatActivity {
                 Manifest.permission.RECEIVE_MMS) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(
                     this, new String[]{Manifest.permission.READ_SMS},
+                    1
+            );
+        }
+
+        if (ContextCompat.checkSelfPermission(this,
+                Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(
+                    this, new String[]{Manifest.permission.READ_PHONE_STATE},
                     1
             );
         }

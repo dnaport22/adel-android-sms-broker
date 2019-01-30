@@ -8,6 +8,9 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.ANSWER_PHONE_CALLS" />
+    <uses-permission android:name="android.permission.PROCESS_OUTGOING_CALLS"/>
 
     <application
         android:allowBackup="true"
@@ -31,6 +34,15 @@
             android:permission="android.permission.BROADCAST_SMS">
             <intent-filter android:priority="1000">
                 <action android:name="android.provider.Telephony.SMS_RECEIVED" />
+            </intent-filter>
+        </receiver>
+        <receiver android:name="com.dnaport.assistanttextmessaging.CallReciever"
+                  android:permission="android.permission.READ_PHONE_STATE">
+            <intent-filter android:priority="1000">
+                <action android:name="android.intent.action.PHONE_STATE" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.NEW_OUTGOING_CALL" />
             </intent-filter>
         </receiver>
     </application>

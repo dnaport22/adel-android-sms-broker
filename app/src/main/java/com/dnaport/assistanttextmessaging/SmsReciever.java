@@ -63,12 +63,6 @@ public class SmsReciever extends BroadcastReceiver {
 
     private void replyBack(String number, JSONObject response) throws JSONException {
         String message = response.getString("text");
-//        if (AssistantConfig.doResponseWithAudio()) {
-//            String audio = response.getString("audio");
-//            byte[] audioByte = audio.getBytes();
-//            convertBytesToFile(audioByte);
-//        }
-
         if (message == "null") {
             sms.sendTextMessage(number, null, "How can I help?", null, null);
         } else {
